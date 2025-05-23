@@ -23,9 +23,7 @@ class orb extends React.Component {
     return (
       <Main className={classes.root} fullWidth>
         <Secuence stagger>
-        <div>Orb 1</div>
-        <div>Orb 2</div>
-        <div>Orb 3</div>
+
         </Secuence>
       </Main>
     );

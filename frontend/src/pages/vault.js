@@ -18,7 +18,7 @@ class vault extends React.Component {
     const { classes } = this.props;
 
     return (
-      <Main className={classes.root}>
+      <Main className={classes.root} fullWidth>
         <Secuence stagger>
         {/* add vault playground here */}
         </Secuence>

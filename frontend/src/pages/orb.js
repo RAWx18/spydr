@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { withStyles } from '../tools/withStyles';
-import { Main } from '../components/Main';
-import { Secuence } from '../components/Secuence';
+import { withStyles } from '../tools/withStyles/index.js';
+import { Main } from '../components/Main/index.js';
+import { Secuence } from '../components/Secuence/index.js';
 
 const styles = theme => ({
   root: {},
@@ -21,9 +21,11 @@ class orb extends React.Component {
     const { classes } = this.props;
 
     return (
-      <Main className={classes.root}>
+      <Main className={classes.root} fullWidth>
         <Secuence stagger>
-        {/* add orb here */}
+        <div>Orb 1</div>
+        <div>Orb 2</div>
+        <div>Orb 3</div>
         </Secuence>
       </Main>
     );

@@ -6,7 +6,7 @@ const styles = theme => ({
     position: 'relative',
     display: 'flex',
     margin: [0, 'auto'],
-    maxWidth: 1000,
+    maxWidth: ({ fullWidth }) => fullWidth ? 'none' : 1000,
     width: '100%'
   },
   frame: {

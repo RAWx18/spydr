@@ -9,7 +9,7 @@ const styles = theme => ({
   root: {}
 });
 
-class Charity extends React.Component {
+class spybots extends React.Component {
   static propTypes = {
     classes: PropTypes.object
   };
@@ -27,4 +27,4 @@ class Charity extends React.Component {
   }
 }
 
-export default withStyles(styles)(Charity);
+export default withStyles(styles)(spybots);

@@ -9,7 +9,7 @@ const styles = theme => ({
   root: {}
 });
 
-class Music extends React.Component {
+class vault extends React.Component {
   static propTypes = {
     classes: PropTypes.object
   };
@@ -27,4 +27,4 @@ class Music extends React.Component {
   }
 }
 
-export default withStyles(styles)(Music);
+export default withStyles(styles)(vault);

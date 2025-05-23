@@ -12,7 +12,7 @@ const styles = theme => ({
   }
 });
 
-class News extends React.Component {
+class orb extends React.Component {
   static propTypes = {
     classes: PropTypes.object
   };
@@ -30,4 +30,4 @@ class News extends React.Component {
   }
 }
 
-export default withStyles(styles)(News);
+export default withStyles(styles)(orb);

@@ -144,7 +144,7 @@ class Component extends React.Component {
         <Link
           className={classes.link}
           href={link}
-          title='Spydr logo'
+          title='Spydr'
           onLinkStart={onLinkStart}
           onLinkEnd={onLinkEnd}
         >

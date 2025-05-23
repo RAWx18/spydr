@@ -50,7 +50,7 @@ class Component extends React.Component {
           onLinkEnd={onLinkEnd}
         >
           <Text animation={{ animate, show, duration }} stableTime>
-            — MADE BY RAW —
+            🕷 Developed BY RAW 🕷
           </Text>
         </Link>
       </p>

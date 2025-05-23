@@ -10,14 +10,14 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
-        name: 'Soul Extract',
-        short_name: 'Soul Extract',
+        name: 'Spydr',
+        short_name: 'Spydr',
         start_url: '/',
         background_color: '#000000',
         theme_color: '#000000',
         display: 'standalone',
         orientation: 'portrait',
-        icon: 'src/images/favicon.png'
+        icon: 'src/images/spydr.png'
       }
     },
     {

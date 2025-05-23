@@ -28,26 +28,26 @@ class About extends React.Component {
             <header>
               <h1><Text>About Spydr</Text></h1>
             </header>
-<Fader>
-  {/* Center wrapper with explicit width control */}
-  <div style={{ 
-    width: '100%', 
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center'
-  }}>
-    <img 
-      src={spydrURL} 
-      alt="SPYDR Logo" 
-      style={{ 
-        width: '250px', /* Fixed width instead of percentage */
-        height: 'auto',
-        display: 'block',
-        border: 'none' 
-      }} 
-    />
-  </div>
-</Fader>
+            <Fader>
+              {/* Center wrapper with explicit width control */}
+              <div style={{ 
+                width: '100%', 
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center'
+              }}>
+                <img 
+                  src={spydrURL} 
+                  alt="SPYDR Logo" 
+                  style={{ 
+                    width: '250px', /* Fixed width instead of percentage */
+                    height: 'auto',
+                    display: 'block',
+                    border: 'none' 
+                  }} 
+                />
+              </div>
+            </Fader>
             <p><Text>SPYDR is an advanced, modular AI framework designed to function as a highly intelligent, self-organizing digital assistant. Unlike traditional assistants, SPYDR is not a monolithic system but a constellation of purpose-driven agents working in harmony under a centralized controller. Its architecture is engineered for adaptability, autonomy, and contextual awareness—capable of understanding complex user intents, managing diverse tasks, and evolving over time.</Text></p>
             <p><Text>At the core of SPYDR lies the Master Controller, a high-level coordinator responsible for interpreting user commands, allocating responsibilities to sub-agents, and integrating the system's actions into seamless, goal-driven behavior. Surrounding this core are twelve specialized agents known as SpyBots, each engineered with a focused role—from task scheduling and development support to communication, research, perception, logic, and system monitoring.</Text></p>
             <Fader>

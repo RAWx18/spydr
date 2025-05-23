@@ -19,21 +19,53 @@ class Component extends React.Component {
   constructor() {
     super(...arguments);
     this.state = {
-      elementsVisible: false
+      elementsVisible: true  // Start with elements visible when page loads
     };
     this.visibilityTimer = null;
+    this.contentHeight = 0;
   }
 
   componentDidMount () {
     window.addEventListener('route-change-start', this.onRouteChangeStart);
     window.addEventListener('route-change', this.onRouteChange);
     window.addEventListener('mousemove', this.handleMouseMove);
+    
+    // Check if this is a refresh/reload
+    if (sessionStorage.getItem('isPageRefreshed')) {
+      // This is a page reload, hide header/footer immediately
+      this.setState({ elementsVisible: false });
+      sessionStorage.removeItem('isPageRefreshed');
+    } else {
+      // First page load - set the flag for next time
+      sessionStorage.setItem('isPageRefreshed', 'true');
+      // Auto-hide elements after a delay when the page first loads
+      this.autoHideElementsAfterLoad();
+    }
+    
+    // Set up beforeunload listener to help detect page reloads
+    window.addEventListener('beforeunload', this.handleBeforeUnload);
+  }
+  
+  handleBeforeUnload = () => {
+    // This will be triggered when page is refreshed or closed
+    sessionStorage.setItem('isPageRefreshed', 'true');
+  }
+  
+  autoHideElementsAfterLoad = () => {
+    // Set a timeout to hide elements after 5 seconds
+    if (!this.visibilityTimer) {
+      this.visibilityTimer = setTimeout(() => {
+        this.setState({ elementsVisible: false });
+        this.visibilityTimer = null;
+      }, 5000);
+    }
   }
 
   componentWillUnmount () {
     window.removeEventListener('route-change-start', this.onRouteChangeStart);
     window.removeEventListener('route-change', this.onRouteChange);
     window.removeEventListener('mousemove', this.handleMouseMove);
+    window.removeEventListener('beforeunload', this.handleBeforeUnload);
     
     // Clear any timers to avoid memory leaks
     if (this.visibilityTimer) {
@@ -50,6 +82,18 @@ class Component extends React.Component {
 
   onRouteChange = () => {
     this.contentElement.scrollTo(0, 0);
+    
+    // When route changes, make header and footer visible
+    this.setState({ elementsVisible: true });
+    
+    // Clear any existing timer that might hide elements
+    if (this.visibilityTimer) {
+      clearTimeout(this.visibilityTimer);
+      this.visibilityTimer = null;
+    }
+    
+    // Set a new timer to auto-hide elements after route change
+    this.autoHideElementsAfterLoad();
   }
   
   handleMouseMove = (e) => {
@@ -97,20 +141,46 @@ class Component extends React.Component {
           className={classes.header}
           ref={ref => (this.header = ref)}
           style={{
-            transform: this.state.elementsVisible ? 'none' : 'scaleY(0.7)',
-            transformOrigin: 'top center',
+            transform: this.state.elementsVisible ? 'none' : 'translateY(-78%)',
             height: 'auto',
-            overflow: 'hidden',
-            fontSize: this.state.elementsVisible ? '1rem' : '0.85rem',
+            overflow: 'visible',
+            paddingBottom: this.state.elementsVisible ? '0' : '15px',
+            fontSize: this.state.elementsVisible ? '1rem' : '0.9rem',
             width: '100%',
-            transition: 'transform 0.2s ease-out, font-size 0.2s ease-out'
+            boxShadow: this.state.elementsVisible ? 'none' : '0 2px 10px rgba(0, 0, 0, 0.15)',
+            position: 'relative',
+            zIndex: 100,
+            transition: 'transform 0.3s ease-out, font-size 0.3s ease-out, box-shadow 0.3s ease-out, padding-bottom 0.3s ease-out'
           }}
         />
         <div
           className={classes.content}
           ref={ref => (this.contentElement = ref)}
+          style={{
+            position: 'relative',
+            overflow: 'hidden', /* Change to hidden here, we'll make the child element scrollable */
+            flex: '1 1 auto',
+            marginTop: this.state.elementsVisible ? '0' : '-70px', /* Increased from -50px to -70px */
+            marginBottom: this.state.elementsVisible ? '0' : '-70px', /* Increased from -50px to -70px */
+            height: this.state.elementsVisible ? 'calc(100% - 100px)' : 'calc(100vh - 20px)', /* Increased height */
+            maxHeight: this.state.elementsVisible ? '85vh' : '100vh',
+            display: 'flex',
+            flexDirection: 'column',
+            transition: 'height 0.3s ease-out, max-height 0.3s ease-out, margin 0.3s ease-out'
+          }}
         >
-          <AppContent>
+          <AppContent
+            style={{
+              flex: '1 1 auto',
+              overflowY: 'auto',
+              overflowX: 'hidden',
+              height: '100%',
+              paddingBottom: this.state.elementsVisible ? '20px' : '60px', /* More padding when collapsed */
+              WebkitOverflowScrolling: 'touch', /* Smooth scrolling on iOS */
+              msOverflowStyle: '-ms-autohiding-scrollbar', /* Better scrollbars on Windows */
+              scrollbarWidth: 'thin' /* Thin scrollbars in Firefox */
+            }}
+          >
             {children}
           </AppContent>
           <Footer
@@ -118,7 +188,7 @@ class Component extends React.Component {
             ref={ref => (this.footer = ref)}
             style={{
               opacity: this.state.elementsVisible ? 1 : 0,
-              transform: this.state.elementsVisible ? 'translateY(0)' : 'translateY(100%)',
+              transform: this.state.elementsVisible ? 'translateY(0)' : 'translateY(105%)',
               transition: 'opacity 0.3s ease-in-out, transform 0.3s ease-in-out'
             }}
           />

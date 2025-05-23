@@ -13,7 +13,7 @@ const styles = theme => ({
     display: 'flex',
     flexDirection: 'column',
     overflowX: 'hidden',
-    overflowY: 'auto',
+    overflowY: 'hidden', /* Changed from auto to hidden */
     width: '100%'
   },
 

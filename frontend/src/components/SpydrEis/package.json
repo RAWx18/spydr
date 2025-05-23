@@ -1,0 +1,35 @@
+{
+  "name": "SPYDR-EIS",
+  "version": "1.0.0",
+  "description": "Spydr EIS is a part of the Spydr project, this module contributes to the Spydr project by providing a visualisation of the Emotional Intelligence System to Spydr AI. The visualisation is created using Three.js and GLSL.",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RAWx18/spydr_eis.git"
+  },
+  "author": "raw",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RAWx18/spydr_eis/issues"
+  },
+  "homepage": "https://github.com/RAWx18/spydr_eis#readme",
+  "dependencies": {
+    "dat.gui": "^0.7.7",
+    "glsl-curl-noise": "^0.0.4",
+    "glsl-noise": "^0.0.0",
+    "gsap": "^3.6.1",
+    "lodash.debounce": "^4.0.8",
+    "parcel-bundler": "^1.12.4",
+    "three": "^0.128.0",
+    "tiny-emitter": "^2.1.0"
+  },
+  "devDependencies": {
+    "glslify-bundle": "^5.1.1",
+    "glslify-deps": "^1.3.2",
+    "sass": "^1.32.13"
+  }
+}
